@@ -15,7 +15,7 @@ This guide explains how to set up the YouTube Data API to automatically fetch Bi
 2. **Create a new project** (or select an existing one)
    - Click "Select a project" at the top
    - Click "NEW PROJECT"
-   - Name it something like "Thousand Oaks Christadelphians Website"
+   - Name it something like "Richmond Petersburg Christadelphians Website"
    - Click "CREATE"
 
 3. **Enable YouTube Data API v3**
