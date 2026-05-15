@@ -5,6 +5,29 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/favicon");
   eleventyConfig.addPassthroughCopy("src/css");
+  eleventyConfig.addPassthroughCopy("src/admin");
+
+  eleventyConfig.addCollection("posts", function (collectionApi) {
+    return collectionApi
+      .getFilteredByGlob("src/posts/*.md")
+      .sort((a, b) => b.date - a.date);
+  });
+
+  eleventyConfig.addFilter("postDate", function (dateValue) {
+    const d = dateValue instanceof Date ? dateValue : new Date(dateValue);
+    if (Number.isNaN(d.getTime())) return "";
+    return d.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  });
+
+  eleventyConfig.addFilter("htmlDate", function (dateValue) {
+    const d = dateValue instanceof Date ? dateValue : new Date(dateValue);
+    if (Number.isNaN(d.getTime())) return "";
+    return d.toISOString().slice(0, 10);
+  });
 
   // Watch for CSS changes
   eleventyConfig.addWatchTarget("./src/css/main.css");
