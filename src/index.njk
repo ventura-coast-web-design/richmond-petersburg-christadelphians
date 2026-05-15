@@ -3,6 +3,7 @@ layout: base.njk
 title: "Richmond Petersburg Christadelphians - A Community of Faith"
 description: "Welcome to the Richmond Petersburg Christadelphian Ecclesia. Join us as we study the Bible and follow the teachings of Jesus Christ."
 ---
+{% from "macros/service-icons.njk" import serviceIcon %}
 
 <section class="hero">
     <div class="hero__left-content">
@@ -14,12 +15,10 @@ description: "Welcome to the Richmond Petersburg Christadelphian Ecclesia. Join 
     </div>
     <div class="hero__right-content">
         <h2 class="schedule_title">Schedule</h2>
-        <h3 class="schedule_subtitle">Sunday School:</h3>
-        <p>9:30 - 10:30 AM</p>
-        <h3 class="schedule_subtitle">Sunday Memorial Service:</h3>
-        <p>10:50 - 12:30 PM</p>
-        <h3 class="schedule_subtitle">Wednesday Evening Bible Class:</h3>
-        <p>7:30 - 8:30 PM</p>
+        {% for row in schedule.heroSchedule %}
+        <h3 class="schedule_subtitle">{{ row.label }}</h3>
+        <p>{{ row.time }}</p>
+        {% endfor %}
     </div>
     <div class="hero__scroll">
         <span>Scroll to explore</span>
@@ -54,48 +53,16 @@ description: "Welcome to the Richmond Petersburg Christadelphian Ecclesia. Join 
         <p class="service-times__subheading">Come join us to gather around God's word! A warm welcome awaits you!</p>
 
         <div class="service-times__grid">
+            {% for svc in schedule.homepageServices %}
             <div class="service-card">
                 <div class="service-card__icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 3L3 9v13h18V9L12 3z"/>
-                        <rect x="9" y="14" width="6" height="8"/>
-                        <path d="M10 3v3h4V3"/>
-                    </svg>
+                    {{ serviceIcon(svc.icon) }}
                 </div>
-                <h3 class="service-card__title">Sunday School</h3>
-                <p class="service-card__time">Sunday 9:30 - 10:30 AM</p>
-                <p class="service-card__description">
-                    Classes available for all ages of children and adults alike, catered to learning about the wonders and power of God's word.
-                </p>
+                <h3 class="service-card__title">{{ svc.title }}</h3>
+                <p class="service-card__time">{{ svc.timeLine }}</p>
+                <p class="service-card__description">{{ svc.description }}</p>
             </div>
-
-            <div class="service-card">
-                <div class="service-card__icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12 6 12 12 16 14"/>
-                    </svg>
-                </div>
-                <h3 class="service-card__title">Sunday Memorial Service</h3>
-                <p class="service-card__time">Sunday 10:50 AM - 12:30 PM</p>
-                <p class="service-card__description">
-                    We gather to remember the Lord Jesus Christ in the breaking of bread and wine, as he commanded.
-                </p>
-            </div>
-
-            <div class="service-card">
-                <div class="service-card__icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                    </svg>
-                </div>
-                <h3 class="service-card__title">Wednesday Evening Bible Class</h3>
-                <p class="service-card__time">Wednesday 7:30 - 8:30 PM</p>
-                <p class="service-card__description">
-                    Interactive Bible study where we explore Scripture together and grow in understanding.
-                </p>
-            </div>
+            {% endfor %}
         </div>
 
         <div class="service-times__cta">

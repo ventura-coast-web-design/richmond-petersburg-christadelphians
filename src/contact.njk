@@ -27,26 +27,26 @@ description: "Get in touch with us - Service times, location, and contact inform
             
             <div class="service-times-grid">
                 <div class="service-time">
-                    <h3 class="service-time__day">Sunday Morning</h3>
+                    <h3 class="service-time__day">{{ schedule.contactServiceTimes.sundayHeading }}</h3>
                     <div class="service-time__details">
+                        {% for item in schedule.contactServiceTimes.sundayItems %}
                         <div class="service-time__item">
-                            <span class="service-time__label">Sunday School</span>
-                            <span class="service-time__time">9:30 AM</span>
+                            <span class="service-time__label">{{ item.label }}</span>
+                            <span class="service-time__time">{{ item.time }}</span>
                         </div>
-                        <div class="service-time__item">
-                            <span class="service-time__label">Memorial Service</span>
-                            <span class="service-time__time">10:50 AM</span>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
 
                 <div class="service-time">
-                    <h3 class="service-time__day">Wednesday Evening</h3>
+                    <h3 class="service-time__day">{{ schedule.contactServiceTimes.wednesdayHeading }}</h3>
                     <div class="service-time__details">
+                        {% for item in schedule.contactServiceTimes.wednesdayItems %}
                         <div class="service-time__item">
-                            <span class="service-time__label">Bible Class</span>
-                            <span class="service-time__time">7:30 PM</span>
+                            <span class="service-time__label">{{ item.label }}</span>
+                            <span class="service-time__time">{{ item.time }}</span>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

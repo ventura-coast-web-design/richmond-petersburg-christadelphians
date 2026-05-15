@@ -1,0 +1,18 @@
+---
+layout: base.njk
+---
+<section class="blog-hero blog-hero--compact">
+    <div class="blog-hero__container">
+        <p class="blog-hero__back"><a href="/blog/">← All articles</a></p>
+    </div>
+</section>
+
+<article class="post-section post">
+    <header class="post__header">
+        <h1 class="post__title">{{ title }}</h1>
+        <time class="post__meta" datetime="{{ page.date | htmlDate }}">{{ page.date | postDate }}</time>
+    </header>
+    <div class="post__body">
+        {{ content | safe }}
+    </div>
+</article>

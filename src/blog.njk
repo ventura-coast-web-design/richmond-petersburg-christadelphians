@@ -1,0 +1,30 @@
+---
+layout: base.njk
+title: News & Articles
+description: Articles and updates from Richmond Petersburg Christadelphians.
+permalink: /blog/
+---
+
+<section class="blog-hero">
+    <div class="blog-hero__container">
+        <h1 class="blog-hero__title">News & Articles</h1>
+        <p class="blog-hero__subtitle">Updates and writing from our community</p>
+    </div>
+</section>
+
+<section class="blog-list-section">
+    {% if collections.posts | length %}
+    <ul class="blog-list">
+        {% for post in collections.posts %}
+        <li class="blog-list__item">
+            <a href="{{ post.url }}" class="blog-list__link">{{ post.data.title }}</a>
+            <time class="blog-list__meta" datetime="{{ post.date | htmlDate }}">{{ post.date | postDate }}</time>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <div class="blog-list">
+        <p class="blog-list__empty">No articles yet. Check back soon.</p>
+    </div>
+    {% endif %}
+</section>
