@@ -1,0 +1,45 @@
+{
+  "heroSchedule": [
+    { "label": "Sunday School:", "time": "9:30 - 10:30 AM" },
+    { "label": "Sunday Memorial Service:", "time": "10:50 - 12:30 PM" },
+    { "label": "Wednesday Evening Bible Class:", "time": "7:30 - 8:30 PM" }
+  ],
+  "homepageServices": [
+    {
+      "icon": "sundaySchool",
+      "title": "Sunday School",
+      "timeLine": "Sunday 9:30 - 10:30 AM",
+      "description": "Classes available for all ages of children and adults alike, catered to learning about the wonders and power of God's word."
+    },
+    {
+      "icon": "memorial",
+      "title": "Sunday Memorial Service",
+      "timeLine": "Sunday 10:50 AM - 12:30 PM",
+      "description": "We gather to remember the Lord Jesus Christ in the breaking of bread and wine, as he commanded."
+    },
+    {
+      "icon": "wednesdayClass",
+      "title": "Wednesday Evening Bible Class",
+      "timeLine": "Wednesday 7:30 - 8:30 PM",
+      "description": "Interactive Bible study where we explore Scripture together and grow in understanding."
+    }
+  ],
+  "footerServiceTimes": [
+    { "title": "Sunday School", "time": "9:30 AM" },
+    { "title": "Memorial Service", "time": "10:50 AM" }
+  ],
+  "contactServiceTimes": {
+    "sundayHeading": "Sunday Morning",
+    "sundayItems": [
+      { "label": "Sunday School", "time": "9:30 AM" },
+      { "label": "Memorial Service", "time": "10:50 AM" }
+    ],
+    "wednesdayHeading": "Wednesday Evening",
+    "wednesdayItems": [{ "label": "Bible Class", "time": "7:30 PM" }]
+  },
+  "visitEventTimes": [
+    { "time": "9:30 - 10:30 AM" },
+    { "time": "10:50 AM - 12:30 PM" },
+    { "time": "7:30 - 8:30 PM" }
+  ]
+}

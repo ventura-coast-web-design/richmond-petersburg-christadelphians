@@ -1,0 +1,153 @@
+@use "variables";
+
+.blog-hero {
+  background: linear-gradient(135deg, #588157 0%, #3a5a40 100%);
+  color: white;
+  padding: 4rem 0;
+  text-align: center;
+
+  @media (min-width: variables.$breakpoint-md) {
+    padding: 5rem 0;
+  }
+
+  &__container {
+    max-width: variables.$container-max-width;
+    margin: 0 auto;
+    padding: 0 variables.$container-padding;
+  }
+
+  &__title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin: 0 0 0.75rem;
+    line-height: 1.2;
+
+    @media (min-width: variables.$breakpoint-md) {
+      font-size: 3rem;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.1rem;
+    font-weight: 300;
+    margin: 0;
+    opacity: 0.95;
+  }
+
+  &--compact {
+    padding: 2rem 0 1rem;
+    text-align: left;
+
+    @media (min-width: variables.$breakpoint-md) {
+      padding: 2.5rem 0 1rem;
+    }
+  }
+
+  &__back {
+    margin: 0;
+
+    a {
+      color: inherit;
+      font-weight: 600;
+      text-decoration: none;
+      opacity: 0.95;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.blog-list-section {
+  padding: 3rem 0 5rem;
+  background: variables.$light-background;
+}
+
+.blog-list {
+  max-width: variables.$container-max-width;
+  margin: 0 auto;
+  padding: 0 variables.$container-padding;
+  list-style: none;
+
+  &__item {
+    margin-bottom: 1.25rem;
+  }
+
+  &__link {
+    color: variables.$text-color;
+    font-weight: 600;
+    font-size: 1.125rem;
+    text-decoration: none;
+
+    &:hover {
+      color: variables.$primary-color;
+      text-decoration: underline;
+    }
+  }
+
+  &__meta {
+    display: block;
+    font-size: 0.9rem;
+    color: variables.$light-text;
+    margin-top: 0.25rem;
+  }
+
+  &__empty {
+    color: variables.$light-text;
+    margin: 0;
+  }
+}
+
+.post-section {
+  padding: 0 0 4rem;
+}
+
+.post {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem variables.$container-padding 0;
+
+  &__header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid variables.$border-color;
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: variables.$text-color;
+    margin: 0 0 0.75rem;
+    line-height: 1.2;
+  }
+
+  &__meta {
+    font-size: 0.95rem;
+    color: variables.$light-text;
+  }
+
+  &__body {
+    color: variables.$text-color;
+    line-height: variables.$line-height-base;
+
+    p {
+      margin: 0 0 1rem;
+    }
+
+    h2,
+    h3 {
+      margin: 2rem 0 0.75rem;
+      color: variables.$text-color;
+    }
+
+    ul,
+    ol {
+      margin: 0 0 1rem 1.25rem;
+    }
+
+    a {
+      color: variables.$primary-color;
+    }
+  }
+}
