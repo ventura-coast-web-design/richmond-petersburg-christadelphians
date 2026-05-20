@@ -10,6 +10,7 @@
                 <h3 class="footer__heading">Quick Links</h3>
                 <ul class="footer__links">
                     <li><a href="/about" class="footer__link">About Us</a></li>
+                    <li><a href="/blog/" class="footer__link">Articles</a></li>
                     <li><a href="/visit" class="footer__link">Visit Us</a></li>
                     <li><a href="/contact" class="footer__link">Contact Us</a></li>
                     <li><a rel="noopener noreferrer" href="https://www.bibleunlocked.com/" class="footer__link">Bible Unlocked</a></li>
@@ -18,14 +19,12 @@
 
             <div class="footer__section footer__section--service">
                 <h3 class="footer__heading">Service Times</h3>
+                {% for row in schedule.footerServiceTimes %}
                 <div class="footer__service-time">
-                    <p class="footer__text"><strong>Sunday School</strong></p>
-                    <p class="footer__text">9:30 AM</p>
+                    <p class="footer__text"><strong>{{ row.title }}</strong></p>
+                    <p class="footer__text">{{ row.time }}</p>
                 </div>
-                <div class="footer__service-time">
-                    <p class="footer__text"><strong>Memorial Service</strong></p>
-                    <p class="footer__text">10:50 AM</p>
-                </div>
+                {% endfor %}
             </div>
 
             <div class="footer__section footer__section--contact">

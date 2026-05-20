@@ -1,71 +1,94 @@
+const fs = require("fs");
+const path = require("path");
 const EleventyFetch = require("@11ty/eleventy-fetch");
 
-// Load environment variables from .env file
-require('dotenv').config();
+require("dotenv").config();
 
-module.exports = async function() {
-  // YouTube API key - set this in your environment variables
+const CHANNEL_ID = "UCNhfznzhfLYfHUtsxivtciQ";
+
+function loadManualVideos() {
+  try {
+    const filePath = path.join(__dirname, "manualVideos.json");
+    const parsed = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    return Array.isArray(parsed.videos) ? parsed.videos : [];
+  } catch {
+    return [];
+  }
+}
+
+function youtubeIdFromUrl(url) {
+  if (!url || typeof url !== "string") return null;
+  const m = url.match(
+    /(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+  );
+  return m ? m[1] : null;
+}
+
+function normalizeManualVideo(raw, index) {
+  const fromUrl = youtubeIdFromUrl(raw.url);
+  const id = raw.id || fromUrl || `manual-${index}`;
+  const url =
+    raw.url ||
+    (fromUrl ? `https://www.youtube.com/shorts/${fromUrl}` : "");
+  let thumbnail = raw.thumbnail;
+  if (!thumbnail && (raw.id || fromUrl)) {
+    const vid = raw.id || fromUrl;
+    thumbnail = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
+  }
+  return {
+    id,
+    title: raw.title || "Video",
+    thumbnail: thumbnail || "",
+    duration: raw.duration || "",
+    url,
+  };
+}
+
+function parseDuration(isoDuration) {
+  const match = isoDuration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+  if (!match) return "0:00";
+  const hours = parseInt(match[1] || 0, 10);
+  const minutes = parseInt(match[2] || 0, 10);
+  const seconds = parseInt(match[3] || 0, 10);
+  if (hours > 0) {
+    return `${hours}:${minutes.toString().padStart(2, "0")}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
+  }
+  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
+function placeholderVideos() {
+  const id = "dQw4w9WgXcQ";
+  const base = {
+    id,
+    thumbnail: `https://img.youtube.com/vi/${id}/maxresdefault.jpg`,
+    url: `https://www.youtube.com/shorts/${id}`,
+  };
+  return [
+    { ...base, title: "Biblically Accurate Angels, Explained", duration: "5:45" },
+    { ...base, title: "A Beginner's Guide to Bible Prophecy", duration: "6:41" },
+    { ...base, title: "What is Faith?", duration: "4:35" },
+    { ...base, title: "God's Involvement in Suffering | Part 3", duration: "4:13" },
+    { ...base, title: "God's Purpose in Suffering | Part 2", duration: "5:22" },
+  ];
+}
+
+async function fetchYouTubeVideos() {
   const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
-  
-  // Bible Unlocked channel ID
-  // To find the channel ID:
-  // 1. Go to https://www.youtube.com/@bibleunlocked
-  // 2. Click on any video
-  // 3. View page source (Ctrl+U or Cmd+Option+U)
-  // 4. Search for "channelId" - it will be like "UC..."
-  // Or use a tool like: https://www.streamweasels.com/tools/youtube-channel-id-and-user-id-convertor/
-  const CHANNEL_ID = "UCNhfznzhfLYfHUtsxivtciQ"; // Replace with actual Bible Unlocked channel ID
-  
-  // If no API key is set, return placeholder data
   if (!YOUTUBE_API_KEY) {
-    console.warn("⚠️  YOUTUBE_API_KEY not set. Using placeholder data for Bible Unlocked videos.");
-    console.warn("   Set YOUTUBE_API_KEY environment variable to fetch real data.");
-    return [
-      {
-        id: "dQw4w9WgXcQ",
-        title: "Biblically Accurate Angels, Explained",
-        thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-        duration: "5:45",
-        url: "https://www.youtube.com/shorts/dQw4w9WgXcQ"
-      },
-      {
-        id: "dQw4w9WgXcQ",
-        title: "A Beginner's Guide to Bible Prophecy",
-        thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-        duration: "6:41",
-        url: "https://www.youtube.com/shorts/dQw4w9WgXcQ"
-      },
-      {
-        id: "dQw4w9WgXcQ",
-        title: "What is Faith?",
-        thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-        duration: "4:35",
-        url: "https://www.youtube.com/shorts/dQw4w9WgXcQ"
-      },
-      {
-        id: "dQw4w9WgXcQ",
-        title: "God's Involvement in Suffering | Part 3",
-        thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-        duration: "4:13",
-        url: "https://www.youtube.com/shorts/dQw4w9WgXcQ"
-      },
-      {
-        id: "dQw4w9WgXcQ",
-        title: "God's Purpose in Suffering | Part 2",
-        thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-        duration: "5:22",
-        url: "https://www.youtube.com/shorts/dQw4w9WgXcQ"
-      }
-    ];
+    console.warn(
+      "⚠️  YOUTUBE_API_KEY not set. Using placeholder data for Bible Unlocked videos."
+    );
+    return placeholderVideos();
   }
 
   try {
-    // Fetch the latest uploads from the channel
     const searchUrl = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${CHANNEL_ID}&part=snippet&order=date&maxResults=10&type=video&videoDuration=short`;
-    
+
     const searchData = await EleventyFetch(searchUrl, {
-      duration: "1h", // Cache for 1 hour
-      type: "json"
+      duration: "1h",
+      type: "json",
     });
 
     if (!searchData.items || searchData.items.length === 0) {
@@ -73,54 +96,42 @@ module.exports = async function() {
       return [];
     }
 
-    // Get video IDs
-    const videoIds = searchData.items.map(item => item.id.videoId).join(',');
-
-    // Fetch detailed video information including duration
+    const videoIds = searchData.items.map((item) => item.id.videoId).join(",");
     const videosUrl = `https://www.googleapis.com/youtube/v3/videos?key=${YOUTUBE_API_KEY}&id=${videoIds}&part=snippet,contentDetails`;
-    
+
     const videosData = await EleventyFetch(videosUrl, {
       duration: "1h",
-      type: "json"
+      type: "json",
     });
 
-    // Format the videos data
-    const videos = videosData.items.map(video => {
-      const duration = parseDuration(video.contentDetails.duration);
-      
-      return {
-        id: video.id,
-        title: video.snippet.title,
-        thumbnail: video.snippet.thumbnails.high?.url || 
-                   video.snippet.thumbnails.medium?.url || 
-                   video.snippet.thumbnails.default?.url,
-        duration: duration,
-        url: `https://www.youtube.com/shorts/${video.id}`
-      };
-    });
+    const videos = videosData.items.map((video) => ({
+      id: video.id,
+      title: video.snippet.title,
+      thumbnail:
+        video.snippet.thumbnails.high?.url ||
+        video.snippet.thumbnails.medium?.url ||
+        video.snippet.thumbnails.default?.url,
+      duration: parseDuration(video.contentDetails.duration),
+      url: `https://www.youtube.com/shorts/${video.id}`,
+    }));
 
     console.log(`✅ Fetched ${videos.length} videos from Bible Unlocked`);
     return videos;
-
   } catch (error) {
     console.error("❌ Error fetching Bible Unlocked videos:", error.message);
     return [];
   }
-};
-
-// Helper function to parse ISO 8601 duration to MM:SS format
-function parseDuration(isoDuration) {
-  const match = isoDuration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-  
-  if (!match) return "0:00";
-  
-  const hours = parseInt(match[1] || 0);
-  const minutes = parseInt(match[2] || 0);
-  const seconds = parseInt(match[3] || 0);
-  
-  if (hours > 0) {
-    return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-  }
-  
-  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
+
+module.exports = async function () {
+  const manualRaw = loadManualVideos();
+  const manualVideos = manualRaw
+    .map(normalizeManualVideo)
+    .filter((v) => v.url && v.url !== "#");
+
+  const manualIds = new Set(manualVideos.map((v) => String(v.id)));
+  const fromYouTube = await fetchYouTubeVideos();
+  const rest = fromYouTube.filter((v) => !manualIds.has(String(v.id)));
+
+  return [...manualVideos, ...rest];
+};
