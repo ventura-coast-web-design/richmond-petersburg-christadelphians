@@ -11,14 +11,14 @@
   justify-content: center;
   gap: 1rem;
   padding: 1rem;
-  background: url('/assets/new_ecclesial-photo.webp') center center / cover no-repeat;
+  background: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center center / cover no-repeat;
   color: white;
   text-align: center;
   overflow: hidden;
 
   @media (min-width: $breakpoint-md) {
     min-height: 80vh;
-  }
+  } 
 
   @media (min-width: $breakpoint-lg) {
     flex-direction: row;
