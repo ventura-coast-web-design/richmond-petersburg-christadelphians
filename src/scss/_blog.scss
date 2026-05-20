@@ -149,5 +149,22 @@
     a {
       color: variables.$primary-color;
     }
+
+    img,
+    video {
+      max-width: 90%;
+      height: auto;
+      display: block;
+      margin: 1rem 0;
+    }
+
+    figure {
+      margin: 1.25rem 0;
+
+      img,
+      video {
+        margin: 0;
+      }
+    }
   }
 }
