@@ -13,9 +13,13 @@
   }
 
   &__container {
-    max-width: variables.$container-max-width;
+    max-width: 90%;
     margin: 0 auto;
     padding: 0 variables.$container-padding;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    padding: 1rem;
+    backdrop-filter: blur(1px);
   }
 
   &__title {
