@@ -983,17 +983,17 @@
   }
 }
 
-// Video Card
+// Video Card (16:9 standard YouTube)
 .video-card {
   flex: 0 0 auto;
-  width: 280px;
+  width: min(100%, 320px);
   scroll-snap-align: start;
   text-decoration: none;
   color: $text-color;
   transition: transform 0.3s ease;
 
   @media (min-width: $breakpoint-md) {
-    width: 300px;
+    width: 360px;
   }
 
   &:hover {
@@ -1011,7 +1011,7 @@
   &__thumbnail {
     position: relative;
     width: 100%;
-    aspect-ratio: 9 / 16;
+    aspect-ratio: 16 / 9;
     border-radius: 12px;
     overflow: hidden;
     background: $light-background;

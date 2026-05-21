@@ -32,7 +32,7 @@ collections:
             fields:
               - { label: Title, name: title, widget: string }
               - { label: Publish date, name: date, widget: datetime, time_format: false, date_format: YYYY-MM-DD, required: false, hint: "Used to sort videos; newest appear on the home page" }
-              - { label: URL, name: url, widget: string, hint: "YouTube watch or Shorts URL" }
+              - { label: URL, name: url, widget: string, hint: "YouTube watch URL (youtube.com/watch?v=…)" }
               - { label: Thumbnail URL, name: thumbnail, widget: string, required: false }
               - { label: Duration, name: duration, widget: string, required: false, hint: "e.g. 5:30" }
 
