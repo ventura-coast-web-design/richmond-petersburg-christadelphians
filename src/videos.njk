@@ -1,0 +1,27 @@
+---
+layout: base.njk
+title: Videos
+description: Video teachings and updates from Richmond Petersburg Christadelphians.
+permalink: /videos/
+---
+
+<section class="blog-hero">
+    <div class="blog-hero__container">
+        <h1 class="blog-hero__title">Videos</h1>
+        <p class="blog-hero__subtitle">Watch teachings and updates from our community</p>
+    </div>
+</section>
+
+<section class="videos-index">
+    <div class="videos-index__container">
+        {% if videos.all | length %}
+        <div class="videos-grid">
+            {% for video in videos.all %}
+            {% include "video-card.njk" %}
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="videos-index__empty">No videos yet. Check back soon.</p>
+        {% endif %}
+    </div>
+</section>

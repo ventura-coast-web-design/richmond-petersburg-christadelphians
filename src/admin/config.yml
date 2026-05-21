@@ -18,19 +18,20 @@ collections:
       - { label: Body, name: body, widget: markdown }
 
   - name: manual_videos
-    label: "Home: manual video links"
+    label: Videos
     files:
       - name: manual_videos
-        label: Featured / manual videos
+        label: Video library
         file: src/_data/manualVideos.json
         format: json
         fields:
-          - label: Videos (shown first; YouTube API videos follow)
+          - label: Videos (newest publish date shown first on the home page)
             name: videos
             widget: list
             summary: "{{fields.title}}"
             fields:
               - { label: Title, name: title, widget: string }
+              - { label: Publish date, name: date, widget: datetime, time_format: false, date_format: YYYY-MM-DD, required: false, hint: "Used to sort videos; newest appear on the home page" }
               - { label: URL, name: url, widget: string, hint: "YouTube watch or Shorts URL" }
               - { label: Thumbnail URL, name: thumbnail, widget: string, required: false }
               - { label: Duration, name: duration, widget: string, required: false, hint: "e.g. 5:30" }

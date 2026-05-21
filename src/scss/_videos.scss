@@ -1,0 +1,32 @@
+@use "variables";
+
+.videos-index {
+  padding: 3rem 0 5rem;
+  background: variables.$light-background;
+
+  &__container {
+    max-width: variables.$container-max-width;
+    margin: 0 auto;
+    padding: 0 variables.$container-padding;
+  }
+
+  &__empty {
+    color: variables.$light-text;
+    margin: 0;
+    text-align: center;
+  }
+}
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+
+  @media (min-width: variables.$breakpoint-md) {
+    gap: 2rem;
+  }
+
+  .video-card {
+    width: 100%;
+  }
+}

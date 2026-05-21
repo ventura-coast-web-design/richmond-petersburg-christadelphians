@@ -1,0 +1,16 @@
+<a href="{{ video.url }}" target="_blank" rel="noopener noreferrer" class="video-card">
+    <div class="video-card__thumbnail">
+        {% if video.thumbnail %}
+        <img src="{{ video.thumbnail }}" alt="{{ video.title }}" loading="lazy" />
+        {% endif %}
+        {% if video.duration %}
+        <div class="video-card__duration">{{ video.duration }}</div>
+        {% endif %}
+        <div class="video-card__overlay">
+            <svg class="video-card__play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+        </div>
+    </div>
+    <h3 class="video-card__title">{{ video.title }}</h3>
+</a>

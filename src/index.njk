@@ -194,35 +194,28 @@ description: "Welcome to the Richmond Petersburg Christadelphian Ecclesia. Join 
     </div>
 </section>
 
-<section class="bible-unlocked">
-    <div class="bible-unlocked__container">
-        <h2 class="bible-unlocked__heading">Bible Unlocked</h2>
-        <p class="bible-unlocked__intro">
-            The Bible Unlocked is a series of videos that explore the Bible in a new way.
+<section class="videos-section">
+    <div class="videos-section__container">
+        <h2 class="videos-section__heading">Videos</h2>
+        <p class="videos-section__intro">
+            Watch recent teachings and updates from our community.
         </p>
-        
+
+        {% if videos.recent | length %}
         <div class="video-carousel">
             <div class="video-carousel__track">
-                {% for video in bibleUnlockedVideos %}
-                <a href="{{ video.url }}" target="_blank" rel="noopener noreferrer" class="video-card">
-                    <div class="video-card__thumbnail">
-                        <img src="{{ video.thumbnail }}" alt="{{ video.title }}" loading="lazy" />
-                        <div class="video-card__duration">{{ video.duration }}</div>
-                        <div class="video-card__overlay">
-                            <svg class="video-card__play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <h3 class="video-card__title">{{ video.title }}</h3>
-                </a>
+                {% for video in videos.recent %}
+                {% include "video-card.njk" %}
                 {% endfor %}
             </div>
         </div>
-        
-        <div class="bible-unlocked__cta">
-            <a href="https://www.youtube.com/@bibleunlocked/shorts" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View All Videos</a>
+
+        <div class="videos-section__cta">
+            <a href="/videos/" class="btn btn-outline">View All Videos</a>
         </div>
+        {% else %}
+        <p class="videos-section__empty">No videos yet. Check back soon.</p>
+        {% endif %}
     </div>
 </section>
 
