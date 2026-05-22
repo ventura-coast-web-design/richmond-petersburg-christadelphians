@@ -6,19 +6,25 @@ description: "Welcome to the Richmond Petersburg Christadelphian Ecclesia. Join 
 {% from "macros/service-icons.njk" import serviceIcon %}
 
 <section class="hero">
-    <div class="hero__left-content">
-        <h1 class="hero__title corinthia-bold">Welcome</h1>
-        <p class="hero__subtitle">A community dedicated to understanding and living the Bible's teachings</p>
-        <div class="hero__actions">
+    <div class="hero__inner">
+        <div class="hero__header">
+            <h1 class="hero__title corinthia-bold">Welcome</h1>
+            <p class="hero__subtitle">A community dedicated to understanding and living the Bible's teachings</p>
+        </div>
+        <div class="hero__footer">
+            <div class="hero__schedule">
+                <h2 class="hero__schedule-heading">Schedule</h2>
+                <div class="hero__schedule-list" role="list">
+                    {% for row in schedule.heroSchedule %}
+                    <div class="hero__schedule-item" role="listitem">
+                        <span class="hero__schedule-label">{{ row.label }}</span>
+                        <span class="hero__schedule-time">{{ row.time }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
             <a href="/visit" class="hero__btn hero__btn--primary">Plan Your Visit</a>
         </div>
-    </div>
-    <div class="hero__right-content">
-        <h2 class="schedule_title">Schedule</h2>
-        {% for row in schedule.heroSchedule %}
-        <h3 class="schedule_subtitle">{{ row.label }}</h3>
-        <p>{{ row.time }}</p>
-        {% endfor %}
     </div>
     <div class="hero__scroll">
         <span>Scroll to explore</span>
