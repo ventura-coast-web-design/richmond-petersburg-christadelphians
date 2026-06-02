@@ -486,6 +486,16 @@
     line-height: 1.6;
     color: $light-text;
     margin: 0;
+
+    a {
+      color: $primary-color;
+      font-weight: 600;
+      text-decoration: underline;
+
+      &:hover {
+        color: color.adjust($primary-color, $lightness: -8%);
+      }
+    }
   }
 }
 
