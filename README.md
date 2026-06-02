@@ -25,7 +25,7 @@ If the live site does not update after an editor saves in `/admin/`:
 **What editors can change:**
 
 - **Articles** — Markdown files in `src/posts/` (listed at `/blog/`).
-- **Service schedule** — `src/_data/schedule.json` (home hero, home cards, footer, contact, visit page times).
+- **Service schedule** — `src/_data/schedule.json` (one list of services; times flow to home, footer, contact, and visit pages automatically).
 - **Videos** — `src/_data/manualVideos.json` (home page shows the 3 most recent; full list at `/videos/`).
 
 Media uploads go to `src/assets/uploads/` (configured in `src/admin/config.yml`).

@@ -40,20 +40,15 @@ collections:
     label: Service schedule
     files:
       - name: schedule
-        label: Times & copy (home, footer, contact, visit times)
+        label: Weekly services
         file: src/_data/schedule.json
         format: json
         fields:
-          - label: Home hero (compact schedule)
-            name: heroSchedule
+          - label: Services
+            name: services
             widget: list
-            summary: "{{fields.label}} {{fields.time}}"
-            fields:
-              - { label: Label, name: label, widget: string }
-              - { label: Time, name: time, widget: string }
-          - label: Home page service cards
-            name: homepageServices
-            widget: list
+            summary: "{{fields.title}} — {{fields.day}} {{fields.time}}"
+            hint: "One entry per gathering. Times appear on the home page, footer, contact page, and visit page (in this order)."
             fields:
               - label: Icon
                 name: icon
@@ -61,38 +56,9 @@ collections:
                 options:
                   - { label: Sunday school (building), value: sundaySchool }
                   - { label: Memorial (clock), value: memorial }
-                  - { label: Wednesday class (book), value: wednesdayClass }
+                  - { label: Weekday Bible class (book), value: wednesdayClass }
               - { label: Title, name: title, widget: string }
-              - { label: Time line, name: timeLine, widget: string }
-              - { label: Description, name: description, widget: text }
-          - label: Footer service times
-            name: footerServiceTimes
-            widget: list
-            fields:
-              - { label: Title, name: title, widget: string }
-              - { label: Time, name: time, widget: string }
-          - label: Contact page
-            name: contactServiceTimes
-            widget: object
-            fields:
-              - { label: Sunday section heading, name: sundayHeading, widget: string }
-              - label: Sunday rows
-                name: sundayItems
-                widget: list
-                fields:
-                  - { label: Label, name: label, widget: string }
-                  - { label: Time, name: time, widget: string }
-              - { label: Wednesday section heading, name: wednesdayHeading, widget: string }
-              - label: Wednesday rows
-                name: wednesdayItems
-                widget: list
-                fields:
-                  - { label: Label, name: label, widget: string }
-                  - { label: Time, name: time, widget: string }
-          - label: "Visit page: time text (3 cards, top to bottom)"
-            name: visitEventTimes
-            widget: list
-            field:
-              label: Time range
-              name: time
-              widget: string
+              - { label: Day, name: day, widget: string, hint: "e.g. Sunday or Thursday — groups services on the contact page" }
+              - { label: Time, name: time, widget: string, hint: "e.g. 9:30 - 10:30 AM (hero, visit page, contact)" }
+              - { label: Short time (footer), name: footerTime, widget: string, required: false, hint: "Optional shorter line for the footer, e.g. 9:30 AM" }
+              - { label: Home page description, name: description, widget: text, required: false, hint: "Shown on the home page service cards only. HTML links allowed." }

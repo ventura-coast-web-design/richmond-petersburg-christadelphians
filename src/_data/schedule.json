@@ -1,46 +1,28 @@
 {
-  "heroSchedule": [
-    { "label": "Sunday School:", "time": "9:30 - 10:30 AM" },
-    { "label": "Sunday Memorial Service:", "time": "11:00 - 12:30 PM" },
-    { "label": "Thursday Evening Bible Class:", "time": "7:00 - 8:00 PM" }
-  ],
-  "homepageServices": [
+  "services": [
     {
       "icon": "sundaySchool",
       "title": "Sunday School",
-      "timeLine": "Sunday 9:30 - 10:30 AM",
+      "day": "Sunday",
+      "time": "9:30 - 10:30 AM",
+      "footerTime": "9:30 AM",
       "description": "Classes available for all ages of children and adults alike, catered to learning about the wonders and power of God's word."
     },
     {
       "icon": "memorial",
       "title": "Sunday Memorial Service",
-      "timeLine": "Sunday 11:00 AM - 12:30 PM",
+      "day": "Sunday",
+      "time": "11:00 AM - 12:30 PM",
+      "footerTime": "11:00 AM",
       "description": "We gather to remember the Lord Jesus Christ in the breaking of bread and wine, as he commanded."
     },
     {
       "icon": "wednesdayClass",
       "title": "Thursday Evening Bible Class",
-      "timeLine": "Thursday 7:00 - 8:00 PM",
+      "day": "Thursday",
+      "time": "7:00 - 8:00 PM",
+      "footerTime": "7:00 PM",
       "description": "Interactive Bible study where we explore Scripture together and grow in understanding. Please reach out to us <a href='/contact'>here</a> if you would like to join us as we sometimes meet on zoom."
     }
-  ],
-  "footerServiceTimes": [
-    { "title": "Sunday School", "time": "9:30 AM" },
-    { "title": "Memorial Service", "time": "11:00 AM" },
-    { "title": "Thursday Evening Bible Class", "time": "7:30 - 8:30 PM" }
-  ],
-  "contactServiceTimes": {
-    "sundayHeading": "Sunday Morning",
-    "sundayItems": [
-      { "label": "Sunday School", "time": "9:30 AM" },
-      { "label": "Memorial Service", "time": "11:00 AM" }
-    ],
-    "thursdayHeading": "Thursday Evening",
-    "thursdayItems": [{ "label": "Bible Class", "time": "7:00 PM" }]
-  },
-  "visitEventTimes": [
-    { "time": "9:30 - 10:30 AM" },
-    { "time": "11:00 AM - 12:30 PM" },
-    { "time": "7:00 - 8:00 PM" }
   ]
 }

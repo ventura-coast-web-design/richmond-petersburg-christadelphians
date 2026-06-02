@@ -26,10 +26,11 @@ description: "Get in touch with us - Service times, location, and contact inform
             <p class="service-times-section__subtitle">We meet regularly for worship, Bible study, and fellowship. All are welcome to join us!</p>
             
             <div class="service-times-grid">
+                {% for group in schedule.contactGroups %}
                 <div class="service-time">
-                    <h3 class="service-time__day">{{ schedule.contactServiceTimes.sundayHeading }}</h3>
+                    <h3 class="service-time__day">{{ group.heading }}</h3>
                     <div class="service-time__details">
-                        {% for item in schedule.contactServiceTimes.sundayItems %}
+                        {% for item in group.items %}
                         <div class="service-time__item">
                             <span class="service-time__label">{{ item.label }}</span>
                             <span class="service-time__time">{{ item.time }}</span>
@@ -37,18 +38,7 @@ description: "Get in touch with us - Service times, location, and contact inform
                         {% endfor %}
                     </div>
                 </div>
-
-                <div class="service-time">
-                    <h3 class="service-time__day">{{ schedule.contactServiceTimes.wednesdayHeading }}</h3>
-                    <div class="service-time__details">
-                        {% for item in schedule.contactServiceTimes.wednesdayItems %}
-                        <div class="service-time__item">
-                            <span class="service-time__label">{{ item.label }}</span>
-                            <span class="service-time__time">{{ item.time }}</span>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
