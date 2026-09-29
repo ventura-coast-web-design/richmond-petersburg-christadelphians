@@ -1,0 +1,93 @@
+---
+layout: base.njk
+title: Events
+description: Upcoming and recent events from Richmond Petersburg Christadelphians.
+permalink: /events/
+---
+
+<section class="blog-hero">
+    <div class="blog-hero__container">
+        <h1 class="blog-hero__title">Events</h1>
+        <p class="blog-hero__subtitle">Gatherings and special occasions</p>
+    </div>
+</section>
+
+<section class="blog-list-section events-page">
+    {% set hasUpcoming = collections.upcomingEvents.length %}
+    {% set hasPast = collections.pastEvents.length %}
+
+    <div class="events-group" data-events-upcoming {% if not hasUpcoming %}hidden{% endif %}>
+        <h2 class="events-group__title">Upcoming</h2>
+        <ul class="events-list">
+            {% for event in collections.upcomingEvents %}
+            <li class="events-list__item" data-event-end="{{ event.data.eventLastDay }}">
+                <a href="{{ event.url }}" class="events-list__link">{{ event.data.title }}</a>
+                <p class="events-list__meta">
+                    <time datetime="{{ event.date | htmlDate }}">{{ event.date | eventDate }}</time>
+                    {% if event.data.endDate and (event.data.endDate | htmlDate) != (event.date | htmlDate) %}
+                    <span> – </span><time datetime="{{ event.data.endDate | htmlDate }}">{{ event.data.endDate | eventDate }}</time>
+                    {% endif %}
+                    {% if event.data.time %}<span> · {{ event.data.time }}</span>{% endif %}
+                    {% if event.data.location %}<span> · {{ event.data.location }}</span>{% endif %}
+                </p>
+                {% if event.data.description %}
+                <p class="events-list__description">{{ event.data.description }}</p>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="events-group" data-events-past {% if not hasPast %}hidden{% endif %}>
+        <h2 class="events-group__title">Past</h2>
+        <ul class="events-list events-list--past">
+            {% for event in collections.pastEvents %}
+            <li class="events-list__item" data-event-end="{{ event.data.eventLastDay }}">
+                <a href="{{ event.url }}" class="events-list__link">{{ event.data.title }}</a>
+                <p class="events-list__meta">
+                    <time datetime="{{ event.date | htmlDate }}">{{ event.date | eventDate }}</time>
+                    {% if event.data.endDate and (event.data.endDate | htmlDate) != (event.date | htmlDate) %}
+                    <span> – </span><time datetime="{{ event.data.endDate | htmlDate }}">{{ event.data.endDate | eventDate }}</time>
+                    {% endif %}
+                    {% if event.data.time %}<span> · {{ event.data.time }}</span>{% endif %}
+                    {% if event.data.location %}<span> · {{ event.data.location }}</span>{% endif %}
+                </p>
+                {% if event.data.description %}
+                <p class="events-list__description">{{ event.data.description }}</p>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="events-group" data-events-empty {% if hasUpcoming or hasPast %}hidden{% endif %}>
+        <p class="blog-list__empty">No events yet. Check back soon.</p>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var today = new Intl.DateTimeFormat("en-CA", {
+            timeZone: "America/New_York",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+        }).format(new Date());
+
+        var upcoming = document.querySelector("[data-events-upcoming]");
+        var past = document.querySelector("[data-events-past]");
+        var empty = document.querySelector("[data-events-empty]");
+        if (!upcoming || !past) return;
+
+        var pastList = past.querySelector(".events-list");
+        upcoming.querySelectorAll("[data-event-end]").forEach(function (item) {
+            if (item.getAttribute("data-event-end") < today) {
+                pastList.prepend(item);
+            }
+        });
+
+        upcoming.hidden = !upcoming.querySelector("[data-event-end]");
+        past.hidden = !past.querySelector("[data-event-end]");
+        if (empty) empty.hidden = !(upcoming.hidden && past.hidden);
+    });
+</script>

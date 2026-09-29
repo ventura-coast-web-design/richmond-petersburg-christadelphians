@@ -1,0 +1,29 @@
+---
+layout: base.njk
+---
+<section class="blog-hero blog-hero--compact">
+    <div class="blog-hero__container">
+        <p class="blog-hero__back"><a href="/events/">← All events</a></p>
+    </div>
+</section>
+
+<article class="post-section post">
+    <header class="post__header">
+        <h1 class="post__title">{{ title }}</h1>
+        <p class="post__meta">
+            <time datetime="{{ page.date | htmlDate }}">{{ page.date | eventDate }}</time>
+            {% if endDate and (endDate | htmlDate) != (page.date | htmlDate) %}
+            <span> – </span><time datetime="{{ endDate | htmlDate }}">{{ endDate | eventDate }}</time>
+            {% endif %}
+        </p>
+        {% if time or location %}
+        <p class="post__details">
+            {% if time %}<span class="post__detail">{{ time }}</span>{% endif %}
+            {% if location %}<span class="post__detail">{{ location }}</span>{% endif %}
+        </p>
+        {% endif %}
+    </header>
+    <div class="post__body">
+        {{ content | safe }}
+    </div>
+</article>

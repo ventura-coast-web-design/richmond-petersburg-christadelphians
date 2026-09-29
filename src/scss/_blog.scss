@@ -127,6 +127,15 @@
     color: variables.$light-text;
   }
 
+  &__details {
+    margin: 0.85rem 0 0;
+  }
+
+  &__detail {
+    display: block;
+    color: variables.$text-color;
+  }
+
   &__body {
     color: variables.$text-color;
     line-height: variables.$line-height-base;

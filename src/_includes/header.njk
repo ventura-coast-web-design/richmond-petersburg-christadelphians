@@ -15,6 +15,21 @@
                 <li class="nav__item"><a href="/" class="nav__link">Home</a></li>
                 <li class="nav__item"><a href="/about" class="nav__link">About</a></li>
                 <li class="nav__item"><a href="/blog/" class="nav__link">Articles</a></li>
+                {% if collections.upcomingEvents.length %}
+                <li class="nav__item nav__item--dropdown" data-events-nav>
+                    <a href="/events/" class="nav__link" aria-haspopup="true" aria-controls="nav-events-menu"{% if page.url == "/events/" %} aria-current="page"{% endif %}>Events<span class="nav__caret" aria-hidden="true"></span></a>
+                    <ul class="nav__dropdown" id="nav-events-menu">
+                        {% for event in collections.upcomingEvents %}
+                        <li data-event-end="{{ event.data.eventLastDay }}">
+                            <a href="{{ event.url }}" class="nav__sublink"{% if page.url == event.url %} aria-current="page"{% endif %}>
+                                <span class="nav__sublink-title">{{ event.data.title }}</span>
+                                <time class="nav__sublink-date" datetime="{{ event.date | htmlDate }}">{{ event.date | eventDate }}{% if event.data.endDate and (event.data.endDate | htmlDate) != (event.date | htmlDate) %} – {{ event.data.endDate | eventDate }}{% endif %}</time>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endif %}
                 <li class="nav__item"><a href="/contact" class="nav__link">Contact</a></li>
                 <li class="nav__item"><a href="/visit" class="nav__link nav__link--cta">Plan A Visit</a></li>
             </ul>
@@ -44,6 +59,20 @@
                 menu.classList.remove('nav__menu--active');
             }
         });
+
+        const today = new Intl.DateTimeFormat("en-CA", {
+            timeZone: "America/New_York",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+        }).format(new Date());
+        const eventsNav = document.querySelector("[data-events-nav]");
+        if (eventsNav) {
+            eventsNav.querySelectorAll("[data-event-end]").forEach(function (item) {
+                if (item.getAttribute("data-event-end") < today) item.remove();
+            });
+            if (!eventsNav.querySelector("[data-event-end]")) eventsNav.remove();
+        }
 
         // Handle scroll effect
         let lastScroll = 0;

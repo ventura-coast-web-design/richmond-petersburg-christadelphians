@@ -1,0 +1,55 @@
+@use "variables";
+
+.events-group {
+  max-width: variables.$container-max-width;
+  margin: 0 auto;
+  padding: 0 variables.$container-padding 2.5rem;
+
+  &__title {
+    margin: 0 0 1rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: variables.$text-color;
+  }
+}
+
+.events-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &__item {
+    background: white;
+    border: 1px solid variables.$border-color;
+    border-radius: 10px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 0.85rem;
+  }
+
+  &__link {
+    color: variables.$text-color;
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-decoration: none;
+
+    &:hover {
+      color: variables.$primary-color;
+      text-decoration: underline;
+    }
+  }
+
+  &__meta {
+    margin: 0.35rem 0 0;
+    font-size: 0.92rem;
+    color: variables.$light-text;
+  }
+
+  &__description {
+    margin: 0.55rem 0 0;
+    color: variables.$text-color;
+  }
+
+  &--past &__link {
+    font-weight: 600;
+  }
+}

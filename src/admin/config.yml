@@ -17,6 +17,40 @@ collections:
       - { label: Description, name: description, widget: string, required: false }
       - { label: Body, name: body, widget: markdown }
 
+  - name: events
+    label: Events
+    folder: src/events
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields: ["date", "title", "published"]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - label: Published
+        name: published
+        widget: boolean
+        default: true
+        hint: "Uncheck to hide this event. Only published events that have not ended are added to the site menu."
+      - label: Event date
+        name: date
+        widget: datetime
+        time_format: false
+        date_format: YYYY-MM-DD
+        hint: "The day the event happens. It stays in the menu through this date, or through the end date if you set one."
+      - label: End date
+        name: endDate
+        widget: datetime
+        time_format: false
+        date_format: YYYY-MM-DD
+        required: false
+        hint: "Optional. For a multi-day event, the menu keeps it until this date."
+      - { label: Time, name: time, widget: string, required: false, hint: "e.g. 7:00 PM" }
+      - { label: Location, name: location, widget: string, required: false }
+      - { label: Description, name: description, widget: string, required: false }
+      - label: Body
+        name: body
+        widget: markdown
+        hint: "Write the event like an article. Use the image control in the editor to upload photos into the page."
+
   - name: manual_videos
     label: Videos
     files:

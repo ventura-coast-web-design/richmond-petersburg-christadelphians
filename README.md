@@ -25,6 +25,7 @@ If the live site does not update after an editor saves in `/admin/`:
 **What editors can change:**
 
 - **Articles** — Markdown files in `src/posts/` (listed at `/blog/`).
+- **Events** — Markdown files in `src/events/` (listed at `/events/`). Write them like articles, including photos in the body with the editor’s image button. A published event stays in the site menu until the day it ends (or its end date, for multi-day events). If nothing published is still coming up, Events is left out of the menu.
 - **Service schedule** — `src/_data/schedule.json` (one list of services; times flow to home, footer, contact, and visit pages automatically).
 - **Videos** — `src/_data/manualVideos.json` (home page shows the 3 most recent; full list at `/videos/`).
 
