@@ -17,7 +17,8 @@ function lastDayOf(item) {
 module.exports = function(eleventyConfig) {
   // Copy static assets
   eleventyConfig.addPassthroughCopy("src/assets");
-  eleventyConfig.addPassthroughCopy("src/favicon");
+  // Icons are linked from the site root in base.njk (e.g. /favicon.ico).
+  eleventyConfig.addPassthroughCopy({ "src/favicon": "/" });
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/admin");
 
