@@ -31,6 +31,18 @@ If the live site does not update after an editor saves in `/admin/`:
 
 Media uploads go to `src/assets/uploads/` (configured in `src/admin/config.yml`).
 
+### Event sign-ups and email notifications
+
+When creating or editing an event, switch on **Add a sign-up form** and enter the inbox under **Receive sign-ups at**. Saving publishes a separate Netlify form for that event, named `event-signup-<event-slug>`.
+
+After that deploy finishes, make Netlify send each new response to the selected inbox:
+
+1. Open **Netlify → Forms → Submission notifications**.
+2. Add an **Email notification** for the event’s `event-signup-<event-slug>` form.
+3. Paste the same address entered in **Receive sign-ups at** and save.
+
+Netlify attaches email notifications to a specific form; it cannot read a recipient from event content at submission time. The editor field records the chosen recipient with the event, while this one-time Netlify notification rule performs the actual delivery. Form submissions are also available in Netlify → Forms.
+
 ## Local development
 
 ```bash

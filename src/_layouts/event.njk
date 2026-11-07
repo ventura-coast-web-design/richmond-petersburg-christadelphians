@@ -26,4 +26,43 @@ layout: base.njk
     <div class="post__body">
         {{ content | safe }}
     </div>
+
+    {% if signupEnabled %}
+    <section class="event-signup" aria-labelledby="event-signup-heading">
+        <h2 id="event-signup-heading" class="event-signup__title">Sign up for this event</h2>
+        <p class="event-signup__intro">Please let us know you are coming.</p>
+        <form class="event-signup__form" name="event-signup-{{ page.fileSlug }}" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="event-signup-{{ page.fileSlug }}" />
+            <input type="hidden" name="event" value="{{ title }}" />
+            <p class="event-signup__hidden">
+                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            </p>
+            <div class="event-signup__row">
+                <div class="event-signup__group">
+                    <label for="signup-name-{{ page.fileSlug }}">Name <span aria-hidden="true">*</span></label>
+                    <input id="signup-name-{{ page.fileSlug }}" name="name" type="text" autocomplete="name" required />
+                </div>
+                <div class="event-signup__group">
+                    <label for="signup-email-{{ page.fileSlug }}">Email <span aria-hidden="true">*</span></label>
+                    <input id="signup-email-{{ page.fileSlug }}" name="email" type="email" autocomplete="email" required />
+                </div>
+            </div>
+            <div class="event-signup__row">
+                <div class="event-signup__group">
+                    <label for="signup-guests-{{ page.fileSlug }}">Number attending</label>
+                    <input id="signup-guests-{{ page.fileSlug }}" name="number-attending" type="number" min="1" inputmode="numeric" />
+                </div>
+                <div class="event-signup__group">
+                    <label for="signup-phone-{{ page.fileSlug }}">Phone</label>
+                    <input id="signup-phone-{{ page.fileSlug }}" name="phone" type="tel" autocomplete="tel" />
+                </div>
+            </div>
+            <div class="event-signup__group">
+                <label for="signup-note-{{ page.fileSlug }}">Note or question</label>
+                <textarea id="signup-note-{{ page.fileSlug }}" name="note" rows="4"></textarea>
+            </div>
+            <button class="event-signup__submit" type="submit">Sign up</button>
+        </form>
+    </section>
+    {% endif %}
 </article>

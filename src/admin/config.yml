@@ -46,6 +46,18 @@ collections:
       - { label: Time, name: time, widget: string, required: false, hint: "e.g. 7:00 PM" }
       - { label: Location, name: location, widget: string, required: false }
       - { label: Description, name: description, widget: string, required: false }
+      - label: Add a sign-up form
+        name: signupEnabled
+        widget: boolean
+        default: false
+        required: false
+        hint: "Turn this on to add a Netlify-powered sign-up form to this event page."
+      - label: Receive sign-ups at
+        name: signupEmail
+        widget: string
+        required: false
+        pattern: ['^\\S+@\\S+\\.\\S+$', "Enter an email address."]
+        hint: "The inbox selected for this event. After publishing, use this event's form in Netlify → Forms → Submission notifications to send responses here."
       - label: Body
         name: body
         widget: markdown
