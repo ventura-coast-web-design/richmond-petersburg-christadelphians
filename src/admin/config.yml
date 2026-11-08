@@ -56,7 +56,7 @@ collections:
         name: signupEmail
         widget: string
         required: false
-        pattern: ['^\\S+@\\S+\\.\\S+$', "Enter an email address."]
+        pattern: ['^\S+@\S+\.\S+$', "Enter an email address."]
         hint: "The inbox selected for this event. After publishing, use this event's form in Netlify → Forms → Submission notifications to send responses here."
       - label: Body
         name: body
