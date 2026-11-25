@@ -31,8 +31,8 @@ layout: base.njk
     <section class="event-signup" aria-labelledby="event-signup-heading">
         <h2 id="event-signup-heading" class="event-signup__title">Sign up for this event</h2>
         <p class="event-signup__intro">Please let us know you are coming.</p>
-        <form class="event-signup__form" name="event-signup-{{ page.fileSlug }}" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="event-signup-{{ page.fileSlug }}" />
+        <form class="event-signup__form" name="event-signup" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="event-signup" />
             <input type="hidden" name="event" value="{{ title }}" />
             <p class="event-signup__hidden">
                 <label>Don't fill this out if you're human: <input name="bot-field" /></label>

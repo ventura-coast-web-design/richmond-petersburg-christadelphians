@@ -33,15 +33,15 @@ Media uploads go to `src/assets/uploads/` (configured in `src/admin/config.yml`)
 
 ### Event sign-ups and email notifications
 
-When creating or editing an event, switch on **Add a sign-up form** and enter the inbox under **Receive sign-ups at**. Saving publishes a separate Netlify form for that event, named `event-signup-<event-slug>`.
+When creating or editing an event, switch on **Add a sign-up form**. Every event publishes the same Netlify form, named `event-signup`. Each submission includes the event title, so one inbox can tell the events apart.
 
-After that deploy finishes, make Netlify send each new response to the selected inbox:
+Set the recipient once, after a deploy that includes at least one event with the form turned on:
 
 1. Open **Netlify → Forms → Submission notifications**.
-2. Add an **Email notification** for the event’s `event-signup-<event-slug>` form.
-3. Paste the same address entered in **Receive sign-ups at** and save.
+2. Add an **Email notification** for the `event-signup` form.
+3. Enter the inbox that should receive every sign-up and save.
 
-Netlify attaches email notifications to a specific form; it cannot read a recipient from event content at submission time. The editor field records the chosen recipient with the event, while this one-time Netlify notification rule performs the actual delivery. Form submissions are also available in Netlify → Forms.
+Later events do not need another notification. If that address is not a member of the Netlify team, Netlify sends a confirmation email first, and notifications start after the owner confirms. Submissions are also stored in Netlify → Forms.
 
 ## Local development
 
